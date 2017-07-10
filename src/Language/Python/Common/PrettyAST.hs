@@ -9,6 +9,7 @@
 --
 -- Pretty printing of the Python abstract syntax (version 2.x and 3.x).
 -----------------------------------------------------------------------------
+{-# LANGUAGE FlexibleContexts, UndecidableInstances #-}
 
 module Language.Python.Common.PrettyAST () where
 
@@ -32,7 +33,7 @@ prettyString :: String -> Doc
 -- prettyString str = text (show str)
 prettyString str = text str
 
-instance {-# OVERLAPPABLE #-} Pretty (Module a) where
+instance {-# OVERLAPPABLE #-} Pretty (Statement a) => Pretty (Module a) where
    pretty (Module stmts) = vcat $ map pretty stmts
 
 instance {-# OVERLAPPABLE #-} Pretty (Ident a) where
